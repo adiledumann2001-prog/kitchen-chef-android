@@ -1,63 +1,28 @@
-package com.student.kitchenchef
+// Burada sizin kendi package adınız yazacak (Dokunmayın)
+package com.sizin.paket.adiniz 
 
-import android.app.Activity
 import android.os.Bundle
-import android.webkit.WebView
-import android.webkit.WebViewClient
-import android.webkit.WebChromeClient
-import android.webkit.WebSettings
-import android.view.ViewGroup
-import android.graphics.Color
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Modifier
+import com.sizin.paket.adiniz.ui.theme.KitchenChefTheme // Burası projenizin adıyla oluşan tema adıdır
 
-class MainActivity : Activity() {
-
-    private lateinit var webView: WebView
-
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        window.statusBarColor = Color.rgb(46, 90, 65)
-        window.navigationBarColor = Color.rgb(35, 55, 43)
-
-        webView = WebView(this)
-        webView.layoutParams = ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
-        )
-
-        webView.settings.javaScriptEnabled = true
-        webView.settings.domStorageEnabled = true
-        webView.settings.cacheMode = WebSettings.LOAD_DEFAULT
-        webView.webViewClient = WebViewClient()
-        webView.webChromeClient = WebChromeClient()
-
-        setContentView(webView)
-
-        if (savedInstanceState == null) {
-            webView.loadUrl(
-                "https://adiledumann2001-prog.github.io/gastronomy-recipe-finder/"
-            )
-        } else {
-            webView.restoreState(savedInstanceState)
+        setContent {
+            KitchenChefTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    // Ana ekranımızı burada çağırıyoruz
+                    RecipeListScreen() 
+                }
+            }
         }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        webView.saveState(outState)
-        super.onSaveInstanceState(outState)
-    }
-
-    @Suppress("DEPRECATION")
-    override fun onBackPressed() {
-        if (webView.canGoBack()) {
-            webView.goBack()
-        } else {
-            super.onBackPressed()
-        }
-    }
-
-    override fun onDestroy() {
-        webView.destroy()
-        super.onDestroy()
     }
 }
