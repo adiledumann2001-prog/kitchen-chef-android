@@ -15,7 +15,6 @@ android {
         versionName = "1.0"
     }
 
-    // Modern arayüz (Compose) sistemini aktif ediyoruz
     buildFeatures {
         compose = true
     }
@@ -25,16 +24,13 @@ android {
 }
 
 dependencies {
-    // Uygulamanın çalışması için temel Jetpack Compose kütüphaneleri
     val composeBom = platform("androidx.compose:compose-bom:2024.02.00")
     implementation(composeBom)
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.activity:activity-compose:1.8.2")
 
-    // --- BİZİM ŞIK TASARIM İÇİN EKLEDİĞİMİZ KÜTÜPHANELER ---
-    // 1. İkon Kütüphanesi (Ateş ve saat ikonu için)
+    // Şık tasarım ve resimler için eklediğimiz kütüphaneler
     implementation("androidx.compose.material:material-icons-extended")
-    // 2. Resim Kütüphanesi (İnternetten yemek fotoğrafları çekmek için Coil)
     implementation("io.coil-kt:coil-compose:2.6.0")
 }
